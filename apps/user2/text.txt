@@ -1,0 +1,141 @@
+Sofia Reyes Flores@LAPTOP-J9NQ6ME7 MINGW64 ~/Desktop/PYTHON/django/main
+$ python manage.py runserver
+Unhandled exception in thread started by <function wrapper at 0x000000000414E4A8>
+Traceback (most recent call last):
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\utils\au
+toreload.py", line 228, in wrapper
+    fn(*args, **kwargs)
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\core\man
+agement\commands\runserver.py", line 116, in inner_run
+    autoreload.raise_last_exception()
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\utils\au
+toreload.py", line 251, in raise_last_exception
+    six.reraise(*_exception)
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\utils\au
+toreload.py", line 228, in wrapper
+    fn(*args, **kwargs)
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\__init__
+.py", line 27, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\apps\reg
+istry.py", line 108, in populate
+    app_config.import_models()
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\apps\con
+fig.py", line 202, in import_models
+    self.models_module = import_module(models_module_name)
+  File "C:\Python27\Lib\importlib\__init__.py", line 37, in import_module
+    __import__(name)
+  File "C:\Users\Sofia Reyes Flores\Desktop\PYTHON\django\main\apps\user2\models.py", line 7
+, in <module>
+    import bcrypt
+ImportError: No module named bcrypt
+Performing system checks...
+
+System check identified no issues (0 silenced).
+March 20, 2018 - 15:07:28
+Django version 1.11.11, using settings 'main.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+(DJANGO~1)
+Sofia Reyes Flores@LAPTOP-J9NQ6ME7 MINGW64 ~/Desktop/PYTHON/django/main
+$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+March 20, 2018 - 15:07:34
+Django version 1.11.11, using settings 'main.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[20/Mar/2018 15:07:41] "GET / HTTP/1.1" 200 131
+Performing system checks...
+
+System check identified no issues (0 silenced).
+March 20, 2018 - 15:50:51
+Django version 1.11.11, using settings 'main.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+(DJANGO~1)
+Sofia Reyes Flores@LAPTOP-J9NQ6ME7 MINGW64 ~/Desktop/PYTHON/django/main
+$ python manage.py shell
+Python 2.7.13 (v2.7.13:a06454b1afa1, Dec 17 2016, 20:53:40) [MSC v.1500 64 bit (AMD64)] on w
+in32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from apps.user2.models import*
+>>> from apps.user2.models import *
+>>> exit()
+(DJANGO~1)
+Sofia Reyes Flores@LAPTOP-J9NQ6ME7 MINGW64 ~/Desktop/PYTHON/django/main
+$ python manage.py makemigrations
+Migrations for 'user2':
+  apps\user2\migrations\0001_initial.py
+    - Create model User
+(DJANGO~1)
+Sofia Reyes Flores@LAPTOP-J9NQ6ME7 MINGW64 ~/Desktop/PYTHON/django/main
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, user2
+Running migrations:
+  Applying user2.0001_initial... OK
+(DJANGO~1)
+Sofia Reyes Flores@LAPTOP-J9NQ6ME7 MINGW64 ~/Desktop/PYTHON/django/main
+$ python manage.py shell
+Python 2.7.13 (v2.7.13:a06454b1afa1, Dec 17 2016, 20:53:40) [MSC v.1500 64 bit (AMD64)] on w
+in32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'User' is not defined
+>>> from apps.user2.models import *
+>>> User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21)
+<User object: Sofia Reyes sofiareyeflores8@gmail.com 21>
+>>> User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21)
+<User object: Sofia Reyes sofiareyeflores8@gmail.com 21>
+>>> User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21'
+  File "<console>", line 1
+    User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21'
+
+                     ^
+SyntaxError: EOL while scanning string literal
+>>> User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21')
+  File "<console>", line 1
+    User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21')
+
+                     ^
+SyntaxError: EOL while scanning string literal
+>>> User.objects.create(first_name = 'Sofia', last_name = 'Reyes', email= 'sofiareyeflores8@
+gmail.com', age = 21)
+<User object: Sofia Reyes sofiareyeflores8@gmail.com 21>
+>>> User.objects.get(id=1)
+<User object: Sofia Reyes sofiareyeflores8@gmail.com 21>
+>>> User.objects.get(id=4)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\db\model
+s\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\SOFIAR~1\Desktop\PYTHON\MYENVI~1\DJANGO~1\lib\site-packages\django\db\model
+s\query.py", line 380, in get
+    self.model._meta.object_name
+DoesNotExist: User matching query does not exist.
+>>> User.objects.create(first_name = 'Camilla', last_name = 'Reyes', email= 'cacu8@gmail.com
+', age = 20)
+<User object: Camilla Reyes cacu8@gmail.com 20>
+>>> User.objects.create(first_name = 'Sedu', last_name = 'Reyes', email= 'sedu8@gmail.com',
+age = 13)
+<User object: Sedu Reyes sedu8@gmail.com 13>
+>>> User.objects.create(first_name = 'Sophia', last_name = 'Reyes', email= 'soso8@gmail.com'
+, age = 21)
+<User object: Sophia Reyes soso8@gmail.com 21>
+>>> User.objects.get(id=2).delete
+<bound method User.delete of <User object: Sofia Reyes sofiareyeflores8@gmail.com 21>>
+>>>
