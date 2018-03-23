@@ -13,6 +13,41 @@ def index(request):
         request.session['user_id'] = -1
     return render(request, "index.html")
 
+def checkuser(request):
+    if request.method == 'POST':
+        # User clicks in Register button
+        if request.POST['form_type'] == "reg":
+            post_data = {
+                "name": request.POST['name'],
+                "email": request.POST['email'],
+                "password": request.POST['password'],
+                "confirm_pswrd": request.POST['confirm_pswrd'],
+            }
+            result = Users.objects.createUser(post_data)
+            if result[0]:
+                request.session['user_id'] = result[1].id
+                return redirect("/travels")
+            else:
+                for item in result[1]:
+                    messages.error(request, item)
+                return redirect("/")
+        elif request.POST['form_type'] == "log":
+            post_data = {
+                "email": request.POST['email'],
+                "password": request.POST['password'],
+            }
+            result = Users.objects.checkLogin(post_data)
+            if result[0]:
+                request.session['user_id'] = result[1].id
+                return redirect("/travels")
+            else:
+                for item in result[1]:
+                    messages.error(request, item)
+                return redirect("/")
+        else:
+            messages.error(request, "Unknown form method request")
+            return redirect("/")
+
 def travels(request):
     try:
         user = Users.objects.get(id=request.session['user_id'])
@@ -48,7 +83,7 @@ def destination(request, trip_id):
         }
         return render(request, "destination.html", context)
     except ObjectDoesNotExist:
-        messages.error(request, "Trip id unknown!!")
+        messages.error(request, "Trip ID unknown!!")
         return redirect('/travels')
 
 def addtravel(request):
@@ -65,10 +100,10 @@ def checktravel(request):
         }
         result = Trips.objects.createTrip(post_data)
         if result[0]:
-            print "@"*50
+            print "@"*20
             for item in result[1]:
                 print item
-            print "@"*50
+            print "@"*20
             return redirect("/travels")
         else:
             for item in result[1]:
@@ -87,43 +122,8 @@ def jointravel(request, trip_id):
             messages.error(request, item)
         return redirect('/travels')
 
-def checkuser(request):
-    if request.method == 'POST':
-        # User clicks in Register button
-        if request.POST['form_type'] == "reg":
-            post_data = {
-                "name": request.POST['name'],
-                "email": request.POST['email'],
-                "password": request.POST['password'],
-                "confirm_pswrd": request.POST['confirm_pswrd'],
-            }
-            result = Users.objects.createUser(post_data)
-            if result[0]:
-                request.session['user_id'] = result[1].id
-                return redirect("/travels")
-            else:
-                for item in result[1]:
-                    messages.error(request, item)
-                return redirect("/")
-        # User clicks on login button
-        elif request.POST['form_type'] == "log":
-            post_data = {
-                "email": request.POST['email'],
-                "password": request.POST['password'],
-            }
-            result = Users.objects.checkLogin(post_data)
-            if result[0]:
-                request.session['user_id'] = result[1].id
-                return redirect("/travels")
-            else:
-                for item in result[1]:
-                    messages.error(request, item)
-                return redirect("/")
-        else:
-            messages.error(request, "Unknown form method request")
-            return redirect("/")
 
 def logout(request):
     request.session.clear()
-    messages.error(request, "You are logged out.")
+    messages.error(request, "You are logged out!")
     return redirect('/')

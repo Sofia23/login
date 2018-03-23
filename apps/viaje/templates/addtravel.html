@@ -2,16 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'exam/css/style.css' %}">
-    <title>Coding Dojo Python Belt Exam</title>
+    <title>Travel Buddy</title>
   </head>
   <body>
     <div class="wrapper">
       <a class="menu" href="/travels">Home</a>
       <a class="menu" href="/logout">Logout</a>
       <div class="addtravel">
-        <h1>Add a Trip</h1>
+        <h1>Add a new Trip</h1>
         <form class="travel_form" action="/checktravel" method="post">
           {% csrf_token %}
           <label for="">Destination:</label><input type="text" name="destination" value="">

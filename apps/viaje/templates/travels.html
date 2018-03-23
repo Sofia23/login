@@ -2,21 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8">
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'exam/css/style.css' %}">
-    <title>Coding Dojo Python Belt Exam</title>
+    <title>Travel Buddy</title>
   </head>
   <body>
-    <div class="travels_wrapper">
-      <p>Hello, {{name}}</p>
+    <div class="wrapper">
+      <p>Hello, {{name}}!</p>
       <a class="menu" href="/logout">Logout</a>
-      <h4>Your trip Schedules</h4>
+      <h4>Your Trip Schedules</h4>
       <table class="trips_t">
         <tr>
-          <th>Destination</th>
-          <th>Travel Start Date</th>
-          <th>Travel end Date</th>
-          <th>Plan</th>
+          <th>Destination:</th>
+          <th>Travel Start Date:</th>
+          <th>Travel end Date:</th>
+          <th>Plan:</th>
         </tr>
           {% for trip in my_trips %}
           <tr>
@@ -30,10 +28,10 @@
       <h4>Other User's Travel Plans</h4>
       <table class="trips_t">
         <tr>
-          <th>Name</th>
-          <th>Destination</th>
-          <th>Travel Start Date</th>
-          <th>Travel end Date</th>
+          <th>Name:</th>
+          <th>Destination:</th>
+          <th>Travel Start Date:</th>
+          <th>Travel end Date:</th>
           <th>Do You Want to Join?</th>
         </tr>
           {% for others in other_trips %}
@@ -46,7 +44,9 @@
           </tr>
           {% endfor %}
       </table>
-      <a class="menu" href="/travels/add">Add Travel Plan</a>
+      <form action="/travels/add">
+        <input type="submit" value="Add" />
+      </form>
       {% if messages %}
       {% for message in messages %}
       <p class="errors">{{message}}</p>

@@ -5,9 +5,9 @@ from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 import re, bcrypt
 from datetime import datetime
-# create a regular expression object that we can use run operations on
+
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
-NAMES_REGEX = re.compile(r'[a-zA-Z]{2,}')
+NAMES_REGEX = re.compile(r'[a-zA-Z]{4,}')
 PSWRD_REGEX = re.compile(r'\w{8,}')
 
 # Create your models here.
@@ -16,27 +16,27 @@ class usersManager(models.Manager):
         errors = []
         try:
             user = Users.objects.get(email=data['email'])
-            errors.append("Email exist in DB")
+            errors.append("Email exist in Data Base")
             return [False, errors]
         except ObjectDoesNotExist:
             #Making validations
-            if len(data['name']) < 1:
-                errors.append("First Name cannot be blank!")
+            if len(data['name']) < 3:
+                errors.append("First Name can not be blank!")
             elif not NAMES_REGEX.match(data['name']):
                 errors.append("Invalid first name format.")
-            #checking email
-            if len(data['email']) < 1:
+
+            if len(data['email']) < 3:
                 errors.append("Email cannot be blank!")
             elif not EMAIL_REGEX.match(data['email']):
                 errors.append("Invalid Email Address format!")
-            #checking password
-            if len(data['password']) < 1:
+
+            if len(data['password']) < 8:
                 errors.append("Password can not be blank!")
             elif data['password'] != data['confirm_pswrd']:
                 errors.append("Passwords do not match")
             elif not PSWRD_REGEX.match(data['password']):
                 errors.append("Invalid password format.")
-            # Passing validations
+
             if errors:
                 return [False, errors]
             else:
@@ -55,7 +55,7 @@ class usersManager(models.Manager):
                 errors.append("Incorrect password.")
                 return [False, errors]
         except ObjectDoesNotExist:
-            errors.append("user and/or password are incorrect. Please, try again")
+            errors.append("User and/or Password are incorrect. Please, try again.")
             return [False, errors]
 class tripsManager(models.Manager):
     def createTrip(self, data):
@@ -83,7 +83,7 @@ class tripsManager(models.Manager):
                 traveler = Users.objects.get(id=data['user_id'])
                 trip = Trips.objects.create(destination=data['destination'], description=data['description'], start_DT=data['start_DT'], end_DT=data['end_DT'])
                 trip.travelers.add(traveler)
-                # trip.save()
+              
                 usertrips = Users.objects.get(id=data['user_id']).trips.all()
                 return [True, usertrips]
             except ObjectDoesNotExist:
@@ -103,13 +103,13 @@ class tripsManager(models.Manager):
                 errors.append("You are already joined this trip")
                 return [False, errors]
         except ObjectDoesNotExist:
-            errors.append("Traveler or Trip ID are not present in our system")
+            errors.append("Traveler or Trip ID do not exist in our system")
             return [False, errors]
 
 class Users(models.Model):
     name = models.CharField(max_length = 50)
     email = models.CharField(max_length = 100, unique=True)
-    password = models.CharField(max_length = 255)
+    password = models.CharField(max_length = 50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -118,7 +118,7 @@ class Users(models.Model):
 
 class Trips(models.Model):
     destination = models.CharField(max_length = 100)
-    description = models.CharField(max_length = 255)
+    description = models.CharField(max_length = 100)
     start_DT = models.DateTimeField()
     end_DT = models.DateTimeField()
     travelers = models.ManyToManyField(Users, related_name="trips")

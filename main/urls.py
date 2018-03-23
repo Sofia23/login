@@ -21,5 +21,5 @@ from django.contrib import admin
 # ]
 
 urlpatterns=[
-    url(r'^', include('apps.review.urls'))
+    url(r'^', include('apps.viaje.urls'))
 ]

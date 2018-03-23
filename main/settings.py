@@ -31,21 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.review',
-    'apps.login',
-    'apps.booksandauthors',
-    'apps.courses',
-    'apps.semi',
-    'apps.dojoninjas',
-    'apps.user2',
-    'apps.ninjagold',
-    'apps.timedisplay',
-    'apps.sessionwords',
-    'apps.amadon',
-    'apps.surveyform',
-    'apps.rwg',
-    'apps.djangoapp',
-    'apps.first_app',
+    'apps.viaje',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
