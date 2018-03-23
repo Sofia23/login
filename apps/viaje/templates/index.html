@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'exam/css/style.css' %}">
+    <title>Coding Dojo Python Belt Exam</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="register">
+        <h1>Registration</h1>
+        <form class="reg_form" action="/checkuser" method="post">
+          {% csrf_token %}
+          <label for="">Name:</label><input type="text" name="name" value="">
+          <br><label for="">Email:</label><input type="text" name="email" value="">
+          <br><label for="">Password:</label><input type="password" name="password" value="">
+          <br><label for="">Confirm pswrd:</label><input type="password" name="confirm_pswrd" value="">
+          <br><input class="button" type="submit" name="register_btn" value="Register">
+          <input type="hidden" name="form_type" value="reg">
+        </form>
+      </div>
+      <div class="login">
+        <h1>Login</h1>
+        <form class="log_form" action="/checkuser" method="post">
+          {% csrf_token %}
+          <label for="">Email:</label><input type="text" name="email" value="">
+          <br><label for="">Password:</label><input type="password" name="password" value="">
+          <br><input class="button" type="submit" name="login_btn" value="Login">
+          <input type="hidden" name="form_type" value="log">
+        </form>
+        {% if messages %}
+        {% for message in messages %}
+        <p class="errors">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
